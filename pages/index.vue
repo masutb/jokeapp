@@ -102,6 +102,7 @@ export default {
     position: relative;
     z-index: 3;
     padding: 0 40px;
+    box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: center;
