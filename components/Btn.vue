@@ -1,10 +1,12 @@
 <template>
   <button :class="classNames" type="button" v-on="$listeners">
     <slot name="icon" />
-    <span>
+    <span class="button__text">
       <slot />
     </span>
     <Loader v-if="isLoading" />
+
+    <div class="button__bg"></div>
   </button>
 </template>
 
@@ -28,18 +30,18 @@ export default {
   },
   computed: {
     classNames() {
-      const classes = []
+      const classes = ['button']
 
       if (this.size) {
-        classes.push(`size-${this.size}`)
+        classes.push(`button--size-${this.size}`)
       }
 
       if (this.type) {
-        classes.push(`type-${this.type}`)
+        classes.push(`button--type-${this.type}`)
       }
 
       if (this.isLoading) {
-        classes.push('is-loading')
+        classes.push('button--is-loading')
       }
 
       return classes
@@ -49,7 +51,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-button {
+.button {
   position: relative;
   margin: 10px;
   height: 80px;
@@ -63,36 +65,59 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+  mask-image: -webkit-radial-gradient(white, black);
 
-  &.size-sm {
+  &--size-sm {
     height: 60px;
     border-radius: 30px;
     padding: 0 30px;
   }
 
-  &.type-delete {
+  &--type-delete {
     background: transparent;
     box-shadow: none;
     height: auto;
-    border-radius: none;
-    font-size: 12px;
-    padding: 0;
-    color: red;
+    padding: 10px;
 
-    ::v-deep svg path:not([fill='none']) {
-      fill: red;
+    .button__bg {
+      background: fade(red, 15%);
     }
   }
 
-  &.is-loading {
+  &--is-loading {
     padding-left: 80px;
   }
 
+  &__bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: @color-blue;
+    transform: translate3d(0, 100%, 0);
+    transition: transform 0.45s ease;
+  }
+
+  &__text,
+  svg {
+    position: relative;
+    z-index: 2;
+  }
+
   .loader {
+    z-index: 2;
     position: absolute;
     left: 30px;
     top: 50%;
     transform: translate3d(0, -50%, 0);
+  }
+
+  @media (hover: hover) {
+    &:not(:disabled):hover .button__bg {
+      transform: translate3d(0, 0, 0);
+    }
   }
 }
 </style>

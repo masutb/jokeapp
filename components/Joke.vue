@@ -20,6 +20,11 @@ export default {
       default: false,
     },
   },
+  data() {
+    return {
+      anim: null,
+    }
+  },
   computed: {
     jokeText() {
       return this.data.type === 'twopart'
@@ -52,8 +57,11 @@ export default {
   },
   methods: {
     toggle(active = true) {
+      clearTimeout(this.anim)
+      this.anim = null
+
       if (active) {
-        setTimeout(() => {
+        this.anim = setTimeout(() => {
           anime({
             targets: this.$el.children,
             translateY: [-100, 0],

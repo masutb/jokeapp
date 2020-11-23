@@ -3,19 +3,19 @@
     <img :src="require('~/assets/images/joker.jpeg')" />
 
     <transition>
-      <div v-if="!currentJoke.hasOwnProperty('id')" class="jokes--actions">
+      <div v-if="!currentJoke.hasOwnProperty('id')" class="jokes__actions">
         <Btn :is-loading="isLoading" @click.prevent="requestJoke">
           Tell me {{ currentJoke.id ? 'another' : 'a' }} joke!
         </Btn>
       </div>
     </transition>
 
-    <ul id="list" class="jokes--current">
+    <ul id="list" class="jokes__current">
       <li
         v-for="item in list"
         ref="item"
         :key="item.id"
-        class="jokes--current--item"
+        class="jokes__current__item"
       >
         <Joke :data="item" :active="currentJoke.id === item.id" />
       </li>
@@ -81,8 +81,9 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
+  height: 100%;
   width: 100%;
+  overflow: auto;
   background: linear-gradient(to right, #1e3c72, #2a5298);
   padding: 100px 0;
   box-sizing: border-box;
@@ -98,7 +99,7 @@ export default {
     mix-blend-mode: overlay;
   }
 
-  &--actions {
+  &__actions {
     position: relative;
     z-index: 3;
     padding: 0 40px;
@@ -113,7 +114,7 @@ export default {
     transform: translate3d(0, -50%, 0);
   }
 
-  &--current {
+  &__current {
     position: relative;
     z-index: 2;
     mix-blend-mode: difference;
@@ -121,7 +122,7 @@ export default {
     width: 100%;
     max-width: 800px;
 
-    &--item {
+    &__item {
       position: absolute;
       top: 0;
       left: 0;

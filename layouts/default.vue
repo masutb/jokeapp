@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="screen">
     <Headerbar />
     <Nuxt />
   </div>

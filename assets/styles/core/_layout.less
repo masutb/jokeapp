@@ -1,8 +1,19 @@
-html,
-body {
+html {
+  font-family: @font-default;
+}
+
+html, body {
   margin: 0;
   padding: 0;
-  font-family: @font-default;
+}
+
+html,
+body,
+#__nuxt,
+#__layout,
+.screen {
+  height: 100%;
+  width: 100%;
 }
 
 button {
@@ -12,7 +23,10 @@ button {
   border-radius: 0;
   border: 0;
   outline: 0;
-  cursor: pointer;
+
+  &:not(:disabled) {
+    cursor: pointer;
+  }
 
 	&::-webkit-inner-spin-button,
 	&::-webkit-outer-spin-button {

@@ -3,8 +3,8 @@
     class="saved"
     :class="{ 'saved-visible': list.length, 'saved-open': isOpen }"
   >
-    <div class="saved--inner">
-      <div class="saved--inner--top">
+    <div class="saved__inner">
+      <div class="saved__inner__top">
         <label id="label"
           >Saved Jokes (<span id="num">{{ list.length }}</span
           >)</label
@@ -149,15 +149,15 @@ export default {
 
   &-open {
     transform: translate3d(0, 0, 0);
-    transition: transform 0.6s ease;
+    transition: transform 0.45s ease;
   }
 
-  &--inner {
+  &__inner {
     max-width: 1200px;
     padding: 20px 40px;
     margin: auto;
 
-    &--top {
+    &__top {
       display: flex;
       align-items: center;
       justify-content: space-between;

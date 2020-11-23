@@ -5,7 +5,7 @@
     >
 
     <transition>
-      <div v-if="currentJoke.hasOwnProperty('id')" class="header--actions">
+      <div v-if="currentJoke.hasOwnProperty('id')" class="header__actions">
         <Btn size="sm" :is-loading="isLoading" @click.prevent="requestJoke">
           Tell me another joke!
         </Btn>
@@ -73,7 +73,7 @@ header {
     }
   }
 
-  .header--actions {
+  .header__actions {
     display: flex;
     align-items: center;
     justify-content: flex-end;
