@@ -37,7 +37,7 @@ const list = [
 const state = { list }
 
 describe("saved", () => {
-  test("returns poodles", () => {
+  test("return saved", () => {
     const actual = getters.saved(state)
     expect(actual).toEqual([ list[0] ])
   })
