@@ -4,14 +4,19 @@
 
     <transition>
       <div v-if="!currentJoke.hasOwnProperty('id')" class="jokes--actions">
-        <Btn @click.prevent="requestJoke" :isLoading="isLoading">
+        <Btn :is-loading="isLoading" @click.prevent="requestJoke">
           Tell me {{ currentJoke.id ? 'another' : 'a' }} joke!
         </Btn>
       </div>
     </transition>
 
     <ul id="list" class="jokes--current">
-      <li ref="item" v-for="item in list" :key="item.id" class="jokes--current--item">
+      <li
+        v-for="item in list"
+        ref="item"
+        :key="item.id"
+        class="jokes--current--item"
+      >
         <Joke :data="item" :active="currentJoke.id === item.id" />
       </li>
     </ul>
@@ -30,7 +35,7 @@ export default {
   components: {
     Joke,
     Btn,
-    Saved
+    Saved,
   },
   data() {
     return {
@@ -55,19 +60,19 @@ export default {
           targets: '#list',
           duration: 600,
           // easing: 'easeOutExpo',
-          height: this.$refs.item[this.list.length - 1].clientHeight + 'px'
+          height: this.$refs.item[this.list.length - 1].clientHeight + 'px',
         })
       }, 0)
-    }
+    },
   },
   mounted() {
     this.$store.dispatch('jokes/load')
   },
   methods: {
-    async requestJoke() {
+    requestJoke() {
       this.$store.dispatch('jokes/request')
     },
-  }
+  },
 }
 </script>
 

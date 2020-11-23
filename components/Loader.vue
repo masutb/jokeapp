@@ -1,8 +1,6 @@
 <template>
   <transition>
-    <span
-      class="loader"
-    >
+    <span class="loader">
       <span class="spinner"></span>
       <span v-if="$slots.default" class="text"><slot /></span>
     </span>
@@ -14,7 +12,7 @@ export default {
   name: 'Loader',
   props: {
     active: Boolean,
-  }
+  },
 }
 </script>
 

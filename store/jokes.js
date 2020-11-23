@@ -1,20 +1,20 @@
 const getIndex = (arr, itemToFind) => {
-  return arr.findIndex(item => item.id === itemToFind.id)
+  return arr.findIndex((item) => item.id === itemToFind.id)
 }
 
 export const state = () => ({
   list: [],
   isLoading: false,
-  current: {}
+  current: {},
 })
 
 export const getters = {
   saved: (state) => {
-    return state.list.filter(item => item.isSaved)
+    return state.list.filter((item) => item.isSaved)
   },
   isCurrentSaved: (state) => {
-    return state.list.find(item => item.id === state.current.id).isSaved
-  }
+    return state.list.find((item) => item.id === state.current.id).isSaved
+  },
 }
 
 export const actions = {
@@ -22,18 +22,22 @@ export const actions = {
     if (!localStorage.jokeIDs) return
     const jokeIDs = JSON.parse(localStorage.jokeIDs)
 
-    let promises = []
+    const promises = []
     let res
 
-    for (let i in jokeIDs) {
-      promises.push(this.$axios.$get(`https://sv443.net/jokeapi/v2/joke/Any?idRange=${jokeIDs[i]}`))
+    for (const i in jokeIDs) {
+      promises.push(
+        this.$axios.$get(
+          `https://sv443.net/jokeapi/v2/joke/Any?idRange=${jokeIDs[i]}`
+        )
+      )
     }
 
     try {
       res = await Promise.all(promises)
-      
-      for (let i in res) {
-        commit('loadSaved', (res[i]))
+
+      for (const i in res) {
+        commit('loadSaved', res[i])
       }
     } catch (e) {
       console.error(e)
@@ -46,9 +50,7 @@ export const actions = {
     let data
 
     try {
-      data = await this.$axios.$get(
-        'https://sv443.net/jokeapi/v2/joke/Any'
-      )
+      data = await this.$axios.$get('https://sv443.net/jokeapi/v2/joke/Any')
 
       commit('setCurrent', data)
     } catch (e) {
@@ -56,7 +58,7 @@ export const actions = {
     }
 
     commit('setLoading', false)
-  }
+  },
 }
 
 export const mutations = {
@@ -68,7 +70,7 @@ export const mutations = {
   addToSaved(state, data) {
     const i = getIndex(state.list, data)
     if (i === -1) return
-    
+
     const item = state.list[i]
     item.isSaved = true
     state.list.splice(i, 1, item)
@@ -86,5 +88,5 @@ export const mutations = {
   setCurrent(state, data) {
     state.list.push(data)
     state.current = data
-  }
+  },
 }

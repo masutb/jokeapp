@@ -1,6 +1,8 @@
 <template>
   <div class="item" :style="{ fontSize: fontSize + 'px' }">
-    <span class="part" v-for="(part, i) in textParts" :key="i">{{ part + (i !== textParts.length - 1 ? '&nbsp;' : '')}}</span>
+    <span v-for="(part, i) in textParts" :key="i" class="part">{{
+      part + (i !== textParts.length - 1 ? '&nbsp;' : '')
+    }}</span>
   </div>
 </template>
 
@@ -11,16 +13,18 @@ export default {
   props: {
     data: {
       type: Object,
-      required: true
+      required: true,
     },
     active: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   computed: {
     jokeText() {
-      return this.data.type === 'twopart' ? this.data.setup + ' ' + this.data.delivery : this.data.joke
+      return this.data.type === 'twopart'
+        ? this.data.setup + ' ' + this.data.delivery
+        : this.data.joke
     },
     textParts() {
       if (!this.jokeText.length) {
@@ -34,14 +38,14 @@ export default {
         return 80
       }
 
-      let size = 80 + ((80 - this.jokeText.length) / 7.5)
+      const size = 80 + (80 - this.jokeText.length) / 7.5
       return Math.max(size, 32)
-    }
+    },
   },
   watch: {
     active(val) {
       this.toggle(val)
-    }
+    },
   },
   mounted() {
     this.active && this.toggle()
@@ -55,7 +59,7 @@ export default {
             translateY: [-100, 0],
             opacity: 1,
             duration: 600,
-            delay: (el, i) => 15 * i
+            delay: (el, i) => 15 * i,
           })
         }, 300)
       } else {
@@ -64,11 +68,11 @@ export default {
           translateY: [0, -100],
           opacity: 0,
           duration: 600,
-          delay: (el, i) => 15 * i
+          delay: (el, i) => 15 * i,
         })
       }
-    }
-  }
+    },
+  },
 }
 </script>
 

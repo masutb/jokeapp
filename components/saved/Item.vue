@@ -1,6 +1,6 @@
 <template>
   <div class="item">
-    <Btn @click.prevent="remove" type="delete">
+    <Btn type="delete" @click.prevent="remove">
       <template v-slot:icon>
         <Icon />
       </template>
@@ -16,24 +16,26 @@ import Icon from '~/assets/svgs/bin.svg?inline'
 export default {
   components: {
     Btn,
-    Icon
-  },
-  computed: {
-    jokeText() {
-      return this.data.type === 'twopart' ? this.data.setup + ' ' + this.data.delivery : this.data.joke
-    }
+    Icon,
   },
   props: {
     data: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
+  },
+  computed: {
+    jokeText() {
+      return this.data.type === 'twopart'
+        ? this.data.setup + ' ' + this.data.delivery
+        : this.data.joke
+    },
   },
   methods: {
     remove() {
       this.$store.commit('jokes/removeFromSaved', this.data)
     },
-  }
+  },
 }
 </script>
 

@@ -1,9 +1,17 @@
 <template>
-  <div class="saved" :class="{ 'saved-visible': list.length, 'saved-open': isOpen }">
+  <div
+    class="saved"
+    :class="{ 'saved-visible': list.length, 'saved-open': isOpen }"
+  >
     <div class="saved--inner">
       <div class="saved--inner--top">
-        <label id="label">Saved Jokes (<span id="num">{{ list.length }}</span>)</label>
-        <Btn size="sm" @click.prevent="isOpen = !isOpen">{{ isOpen ? 'Hide' : 'Show' }}</Btn>
+        <label id="label"
+          >Saved Jokes (<span id="num">{{ list.length }}</span
+          >)</label
+        >
+        <Btn size="sm" @click.prevent="isOpen = !isOpen">{{
+          isOpen ? 'Hide' : 'Show'
+        }}</Btn>
       </div>
 
       <transition-group
@@ -27,24 +35,24 @@
 
 <script>
 import anime from 'animejs'
-import Btn from '~/components/Btn'
 import Item from './Item'
+import Btn from '~/components/Btn'
 
 export default {
   components: {
     Btn,
-    Item
-  },
-  computed: {
-    list() {
-      return this.$store.getters['jokes/saved']
-    },
+    Item,
   },
   data() {
     return {
       isOpen: false,
       duration: 300,
     }
+  },
+  computed: {
+    list() {
+      return this.$store.getters['jokes/saved']
+    },
   },
   watch: {
     list(curr, prev) {
@@ -56,24 +64,23 @@ export default {
         return
       }
 
-      const jokeIDs = curr.map(item => item.id)
+      const jokeIDs = curr.map((item) => item.id)
       localStorage.jokeIDs = JSON.stringify(jokeIDs)
 
-      var tl = anime.timeline({
+      const tl = anime.timeline({
         targets: '#num',
         duration: 250, // Can be inherited
         easing: 'easeOutExpo', // Can be inherited
       })
 
       tl.add({
-        scale: 1.25
-      })
-      .add({
-        scale: 1
+        scale: 1.25,
+      }).add({
+        scale: 1,
       })
 
       tl.play()
-    }
+    },
   },
   methods: {
     beforeEnter(el) {
@@ -98,7 +105,7 @@ export default {
           height,
           duration: this.duration,
           easing: 'easeOutQuart',
-          complete: done
+          complete: done,
         })
       }, this.timeout)
     },
@@ -110,7 +117,7 @@ export default {
         height: 0,
         duration: this.duration,
         easing: 'easeOutQuart',
-        complete: done
+        complete: done,
       })
     },
     beforeLeave(el) {
@@ -118,8 +125,8 @@ export default {
     },
     afterLeave(el) {
       el.style.overflow = 'visible'
-    }
-  }
+    },
+  },
 }
 </script>
 

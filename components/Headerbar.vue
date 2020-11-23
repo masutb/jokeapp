@@ -1,10 +1,12 @@
 <template>
   <header>
-    <label>Joke<em>App</em><span>!<em>?</em></span></label>
-    
+    <label
+      >Joke<em>App</em><span>!<em>?</em></span></label
+    >
+
     <transition>
       <div v-if="currentJoke.hasOwnProperty('id')" class="header--actions">
-        <Btn size="sm" @click.prevent="requestJoke" :isLoading="isLoading">
+        <Btn size="sm" :is-loading="isLoading" @click.prevent="requestJoke">
           Tell me another joke!
         </Btn>
         <Btn size="sm" :disabled="isCurrentSaved" @click.prevent="saveJoke">
@@ -29,18 +31,18 @@ export default {
     currentJoke() {
       return this.$store.state.jokes.current
     },
-    isCurrentSaved () {
+    isCurrentSaved() {
       return this.$store.getters['jokes/isCurrentSaved']
-    }
+    },
   },
   methods: {
-    async requestJoke() {
+    requestJoke() {
       this.$store.dispatch('jokes/request')
     },
-    async saveJoke() {
+    saveJoke() {
       this.$store.commit('jokes/addToSaved', this.currentJoke)
     },
-  }
+  },
 }
 </script>
 

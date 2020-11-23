@@ -10,7 +10,7 @@ import Headerbar from '~/components/Headerbar'
 
 export default {
   components: {
-    Headerbar
-  }
+    Headerbar,
+  },
 }
 </script>

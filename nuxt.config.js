@@ -14,7 +14,8 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       {
         rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css2?family=Nerko+One&family=Open+Sans:wght@400;700&display=swap'
+        href: 
+          'https://fonts.googleapis.com/css2?family=Nerko+One&family=Open+Sans:wght@400;700&display=swap'
       }
     ],
   },
@@ -36,7 +37,7 @@ export default {
   // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
   buildModules: [
     // https://go.nuxtjs.dev/eslint
-    // '@nuxtjs/eslint-module',
+    '@nuxtjs/eslint-module',
   ],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
@@ -51,5 +52,19 @@ export default {
   axios: {},
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
-  build: {},
+  build: {
+    extend(config, { isDev, isClient }) {
+      if (isDev && isClient) {
+        config.module.rules.push({
+          enforce: 'pre',
+          test: /\.(js|vue)$/,
+          loader: 'eslint-loader',
+          exclude: /(node_modules)/,
+          options: {
+            fix: true
+          }
+        })
+      }
+    }
+  }
 }

@@ -13,17 +13,17 @@ import Loader from '~/components/Loader'
 
 export default {
   components: {
-    Loader
+    Loader,
   },
   props: {
     isLoading: Boolean,
     size: {
       type: String,
-      default: ''
+      default: '',
     },
     type: {
       type: String,
-      default: ''
+      default: '',
     },
   },
   computed: {
@@ -43,8 +43,8 @@ export default {
       }
 
       return classes
-    }
-  }
+    },
+  },
 }
 </script>
 
@@ -79,7 +79,7 @@ button {
     padding: 0;
     color: red;
 
-    ::v-deep svg path:not([fill="none"]) {
+    ::v-deep svg path:not([fill='none']) {
       fill: red;
     }
   }
