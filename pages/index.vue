@@ -85,7 +85,6 @@ export default {
   width: 100%;
   overflow: auto;
   background: linear-gradient(to right, #1e3c72, #2a5298);
-  padding: 100px 0;
   box-sizing: border-box;
 
   img {
@@ -121,6 +120,8 @@ export default {
     flex: 0 0 auto;
     width: 100%;
     max-width: 800px;
+    margin: auto;
+    overflow: hidden;
 
     &__item {
       position: absolute;
@@ -128,7 +129,6 @@ export default {
       left: 0;
       height: auto;
       width: 100%;
-      padding: 40px;
       box-sizing: border-box;
     }
   }

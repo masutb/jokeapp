@@ -86,6 +86,7 @@ export default {
 
 <style lang="less" scoped>
 .item {
+  padding: 160px 40px;
   position: relative;
   display: inline-block;
   font-size: 60px;
