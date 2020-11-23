@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Joke renders properly 1`] = `"<div class=\\"item\\" style=\\"font-size: 90.13333333333333px;\\"><span class=\\"part\\">Foo.</span></div>"`;
